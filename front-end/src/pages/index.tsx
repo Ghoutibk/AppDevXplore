@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Seo title="DevXplore" description="Description..."/>
-      <h1>Hello World!</h1>
+      <h1>DevXplore</h1>
     </>
   )
 }
