@@ -1,11 +1,14 @@
 import { Seo } from "@/ui/components/seo"
+import { Typography } from "@/ui/design-system/typography/typography";
 import Head from "next/head";
 
 export default function Home() {
   return (
     <>
       <Seo title="DevXplore" description="Description..."/>
-      <h1>DevXplore</h1>
+      <Typography variant="display">
+        DevXplore
+      </Typography>
     </>
   )
 }
