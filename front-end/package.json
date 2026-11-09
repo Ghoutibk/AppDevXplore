@@ -8,6 +8,7 @@
     "deploy": "npm run build && firebase deploy",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
   "dependencies": {
