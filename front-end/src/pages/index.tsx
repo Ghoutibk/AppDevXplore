@@ -1,6 +1,5 @@
-import { Seo } from "@/ui/components/seo"
-import { Typography } from "@/ui/design-system/typography/typography";
-import Head from "next/head";
+import { Seo } from "@/ui/atoms/seo/seo"
+import { Typography } from "@/ui/atoms/typography/typography";
 
 export default function Home() {
   return (
