@@ -8,7 +8,7 @@ interface Props {
 export const Seo = ({title, description}: Props) => {
     return (
         <Head>
-            <title>{description}</title>
+            <title>{title}</title>
             <meta name="description" content={description}/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
