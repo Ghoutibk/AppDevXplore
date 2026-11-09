@@ -1,4 +1,4 @@
-import { Seo } from "@/ui/components/seo"
+import { Seo } from "@/ui/atoms/seo/seo"
 import { Typography } from "@/ui/atoms/typography/typography";
 
 export default function Home() {
