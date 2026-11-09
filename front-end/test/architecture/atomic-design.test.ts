@@ -1,3 +1,4 @@
+// @vitest-environment node
 import { describe, expect, it } from "vitest";
 import { importsOf, listSourceFiles, segment } from "./source-graph";
 
