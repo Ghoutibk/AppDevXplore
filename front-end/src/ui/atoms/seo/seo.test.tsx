@@ -13,4 +13,10 @@ describe("Seo", () => {
 
     expect(document.title).toBe("DevXplore");
   });
+
+  it("loads the favicon from the site root", () => {
+    render(<Seo title="DevXplore" description="Ressources pour les étudiants" />);
+
+    expect(document.head.querySelector('link[rel="icon"]')).toHaveAttribute("href", "/favicon.ico");
+  });
 });
