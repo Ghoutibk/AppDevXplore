@@ -65,3 +65,11 @@
     --text-caption4--letter-spacing: 0.08em;
     --text-caption4--font-weight: 500;
 }
+
+/* Shared page width: every section lines up on the same column. */
+@utility page-width {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+}
