@@ -40,6 +40,16 @@ describe("GitHub trends page", () => {
     expect(screen.getByRole("contentinfo")).toBeInTheDocument();
   });
 
+  it("describes itself to browsers and search engines", () => {
+    render(<GitHubTrends trends={trends} />);
+
+    expect(document.title).toBe("Tendances GitHub · DevXplore");
+    expect(document.head.querySelector('meta[name="description"]')).toHaveAttribute(
+      "content",
+      "Les dépôts GitHub qui montent et les incontournables en data, cybersécurité et IA, choisis pour les étudiants.",
+    );
+  });
+
   it("loads the GitHub trends when the site is built", async () => {
     expect(await getStaticProps({} as GetStaticPropsContext)).toEqual({ props: { trends } });
   });
