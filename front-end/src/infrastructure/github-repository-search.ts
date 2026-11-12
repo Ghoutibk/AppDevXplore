@@ -43,9 +43,12 @@ export class GitHubRepositorySearch implements RepositorySearch {
     this.fetch = fetch;
   }
 
-  async findMostStarred({ specialty, limit }: RepositorySearchCriteria): Promise<Repository[]> {
+  async findMostStarred({ specialty, limit, createdSince }: RepositorySearchCriteria): Promise<Repository[]> {
+    const qualifiers = [`topic:${topics[specialty]}`];
+    if (createdSince) qualifiers.push(`created:>=${createdSince.toISOString().slice(0, 10)}`);
+
     const url = new URL(SEARCH_URL);
-    url.searchParams.set("q", `topic:${topics[specialty]}`);
+    url.searchParams.set("q", qualifiers.join(" "));
     url.searchParams.set("sort", "stars");
     url.searchParams.set("order", "desc");
     url.searchParams.set("per_page", String(limit));

@@ -27,6 +27,18 @@ describe("GitHubRepositorySearch", () => {
     });
   });
 
+  it("keeps only the repositories created since the given date", async () => {
+    const fetch = fakeFetch({ items: [] });
+
+    await new GitHubRepositorySearch({ fetch }).findMostStarred({
+      specialty: "data",
+      limit: 6,
+      createdSince: new Date("2026-10-13T10:00:00Z"),
+    });
+
+    expect(requestedUrl(fetch).searchParams.get("q")).toBe("topic:data-science created:>=2026-10-13");
+  });
+
   it("turns the repositories found by GitHub into repositories", async () => {
     const fetch = fakeFetch({
       items: [
