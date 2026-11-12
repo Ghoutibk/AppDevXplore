@@ -1,7 +1,6 @@
+import { SOURCE_CODE_URL } from "@/domain/site";
 import { Logo } from "@/ui/atoms/logo/logo";
 import { Typography } from "@/ui/atoms/typography/typography";
-
-const SOURCE_CODE_URL = "https://github.com/Ghoutibk/AppDevXplore";
 
 export const Footer = () => {
     return (
