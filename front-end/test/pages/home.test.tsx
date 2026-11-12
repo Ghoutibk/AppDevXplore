@@ -24,4 +24,12 @@ describe("Home page", () => {
     ).toBeInTheDocument();
     expect(screen.getByText(/DevXplore rassemble des ressources pour les étudiants/)).toBeInTheDocument();
   });
+
+  it("illustrates the hero with the site sections listed in a terminal", () => {
+    render(<Home />);
+
+    for (const folder of ["projets/", "tendances/", "outils/", "github/", "data/", "cybersecurite/", "ia/"]) {
+      expect(screen.getByText(folder)).toBeInTheDocument();
+    }
+  });
 });
