@@ -51,6 +51,31 @@ export default function Home() {
             description="Entraîner, évaluer et déployer des modèles, du classifieur à l'agent."
           />
         </FeatureSection>
+        <FeatureSection
+          id="ressources"
+          kicker="// ressources"
+          title="Pour aller plus loin"
+          description="Ce qui bouge dans le monde du développement, et de quoi t'équiper."
+        >
+          <FeatureCard
+            appearance="ruled"
+            icon="trending"
+            title="Tendances"
+            description="Les technologies et les pratiques qui comptent en ce moment, expliquées simplement."
+          />
+          <FeatureCard
+            appearance="ruled"
+            icon="terminal"
+            title="Outils et skills"
+            description="Les outils à installer et les compétences à travailler pour bien démarrer."
+          />
+          <FeatureCard
+            appearance="ruled"
+            icon="star"
+            title="Tendances GitHub"
+            description="Les dépôts open source qui montent en ce moment."
+          />
+        </FeatureSection>
       </MainTemplate>
     </>
   );

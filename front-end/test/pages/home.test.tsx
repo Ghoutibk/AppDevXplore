@@ -42,4 +42,14 @@ describe("Home page", () => {
     }
     expect(specialties.getAllByText("Bientôt")).toHaveLength(3);
   });
+
+  it("points to the other resources, coming soon", () => {
+    render(<Home />);
+
+    const resources = within(screen.getByRole("region", { name: "Pour aller plus loin" }));
+    for (const resource of ["Tendances", "Outils et skills", "Tendances GitHub"]) {
+      expect(resources.getByRole("heading", { level: 3, name: resource })).toBeInTheDocument();
+    }
+    expect(resources.getAllByText("Bientôt")).toHaveLength(3);
+  });
 });
