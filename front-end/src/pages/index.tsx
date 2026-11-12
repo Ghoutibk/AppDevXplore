@@ -1,7 +1,9 @@
+import { SOURCE_CODE_URL } from "@/domain/site";
 import { ButtonLink } from "@/ui/atoms/button-link/button-link";
 import { Seo } from "@/ui/atoms/seo/seo";
 import { FeatureCard } from "@/ui/molecules/feature-card/feature-card";
 import { Terminal } from "@/ui/molecules/terminal/terminal";
+import { CallToAction } from "@/ui/organisms/call-to-action/call-to-action";
 import { FeatureSection } from "@/ui/organisms/feature-section/feature-section";
 import { Hero } from "@/ui/organisms/hero/hero";
 import { MainTemplate } from "@/ui/templates/main-template/main-template";
@@ -86,6 +88,16 @@ export default function Home() {
             description="Les dépôts open source qui montent en ce moment."
           />
         </FeatureSection>
+        <CallToAction
+          kicker="// contribuer"
+          title="Le site est fait par les étudiants."
+          description="Une idée de projet, un outil ou une ressource à partager ? Ouvre une pull request sur le dépôt du site : chaque contribution est relue avant d'être publiée."
+          action={
+            <ButtonLink href={SOURCE_CODE_URL} variant="primary">
+              Voir le dépôt sur GitHub
+            </ButtonLink>
+          }
+        />
       </MainTemplate>
     </>
   );

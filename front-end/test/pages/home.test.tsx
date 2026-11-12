@@ -59,4 +59,14 @@ describe("Home page", () => {
     }
     expect(resources.getAllByText("Bientôt")).toHaveLength(3);
   });
+
+  it("invites students to contribute on the repository", () => {
+    render(<Home />);
+
+    const invitation = within(screen.getByRole("region", { name: "Le site est fait par les étudiants." }));
+    expect(invitation.getByRole("link", { name: "Voir le dépôt sur GitHub" })).toHaveAttribute(
+      "href",
+      "https://github.com/Ghoutibk/AppDevXplore",
+    );
+  });
 });
