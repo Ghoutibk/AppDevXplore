@@ -25,6 +25,13 @@ describe("Home page", () => {
     expect(screen.getByText(/DevXplore rassemble des ressources pour les étudiants/)).toBeInTheDocument();
   });
 
+  it("lets students jump from the hero to the home sections", () => {
+    render(<Home />);
+
+    expect(screen.getByRole("link", { name: "Choisir ma spécialité" })).toHaveAttribute("href", "#specialites");
+    expect(screen.getByRole("link", { name: "Voir les autres ressources" })).toHaveAttribute("href", "#ressources");
+  });
+
   it("illustrates the hero with the site sections listed in a terminal", () => {
     render(<Home />);
 

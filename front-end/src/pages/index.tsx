@@ -1,3 +1,4 @@
+import { ButtonLink } from "@/ui/atoms/button-link/button-link";
 import { Seo } from "@/ui/atoms/seo/seo";
 import { FeatureCard } from "@/ui/molecules/feature-card/feature-card";
 import { Terminal } from "@/ui/molecules/terminal/terminal";
@@ -15,7 +16,16 @@ export default function Home() {
           title="Trouve ton prochain projet"
           highlight="de développement."
           lead="DevXplore rassemble des ressources pour les étudiants : des idées de projets selon ta spécialité, les tendances du moment, les outils à installer et les dépôts GitHub qui montent."
-          actions={null}
+          actions={
+            <>
+              <ButtonLink href="#specialites" variant="primary">
+                Choisir ma spécialité
+              </ButtonLink>
+              <ButtonLink href="#ressources" variant="secondary">
+                Voir les autres ressources
+              </ButtonLink>
+            </>
+          }
           aside={
             <Terminal
               commands={[
