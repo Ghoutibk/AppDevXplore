@@ -41,8 +41,8 @@ const defaultComponents: Record<Variant, Component> = {
     caption4: "span",
 };
 
-export const Typography = ({ variant, children }: Props) => {
-    const Element = defaultComponents[variant];
+export const Typography = ({ variant, component, children }: Props) => {
+    const Element = component ?? defaultComponents[variant];
 
     return <Element>{children}</Element>;
 };

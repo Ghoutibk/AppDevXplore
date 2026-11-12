@@ -27,4 +27,14 @@ describe("Typography", () => {
 
     expect(screen.getByText("Bientôt").tagName).toBe("SPAN");
   });
+
+  it("renders the requested element instead of the default one", () => {
+    render(
+      <Typography variant="h4" component="h3">
+        Data
+      </Typography>,
+    );
+
+    expect(screen.getByRole("heading", { level: 3, name: "Data" })).toBeInTheDocument();
+  });
 });
