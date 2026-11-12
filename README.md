@@ -27,6 +27,11 @@ npm run dev       # http://localhost:3000
 | `npm run build`     | export statique dans `front-end/out`                       |
 | `npm run deploy`    | build puis déploiement sur Firebase Hosting (`devxplore-off`) |
 
+Le build interroge l'API de recherche de GitHub pour la page « Tendances GitHub » : il lui faut un
+accès réseau. Sans jeton, GitHub accepte 10 recherches par minute, assez pour un build. Pour relever
+cette limite, définis `GITHUB_TOKEN` (un jeton GitHub sans droit particulier) : la CI le fait déjà.
+La liste est donc figée au moment du build et se met à jour à chaque déploiement.
+
 ## Architecture
 
 Next.js (pages router), TypeScript et Tailwind CSS, exporté en site statique et hébergé sur
@@ -85,9 +90,14 @@ Tout texte passe par l'atome `Typography` et ses 14 variantes, de `display` à `
 
 ### Langage omniprésent
 
-Les concepts du métier, tels que le code les nomme. Chaque nouveau concept s'ajoute ici, dans
-un tableau « Terme | Dans le code | Définition ». Il est encore vide : les premiers concepts
-arrivent avec les projets par spécialité.
+Les concepts du métier, tels que le code les nomme. Chaque nouveau concept s'ajoute à ce tableau.
+
+| Terme           | Dans le code  | Définition                                                                 |
+| --------------- | ------------- | -------------------------------------------------------------------------- |
+| Spécialité      | `Specialty`   | domaine d'études des étudiants : data, cybersécurité ou intelligence artificielle |
+| Dépôt           | `Repository`  | projet open source hébergé sur GitHub                                       |
+| Dépôt qui monte | `rising`      | dépôt créé ces 30 derniers jours, classé par nombre d'étoiles               |
+| Incontournable  | `mostStarred` | dépôt le plus étoilé de sa spécialité, tous temps confondus                 |
 
 ## Contribuer
 

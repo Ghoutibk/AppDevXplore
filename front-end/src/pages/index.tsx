@@ -89,6 +89,7 @@ export default function Home() {
             icon="star"
             title="Tendances GitHub"
             description="Les dépôts open source qui montent en ce moment."
+            link={{ href: "/tendances-github", label: "Voir les dépôts" }}
           />
         </FeatureSection>
         <CallToAction
