@@ -39,6 +39,22 @@ describe("GitHubRepositorySearch", () => {
     expect(requestedUrl(fetch).searchParams.get("q")).toBe("topic:data-science created:>=2026-10-13");
   });
 
+  it("authenticates with the token when one is given", async () => {
+    const fetch = fakeFetch({ items: [] });
+
+    await new GitHubRepositorySearch({ fetch, token: "secret" }).findMostStarred({ specialty: "data", limit: 6 });
+
+    expect(new Headers(fetch.mock.calls[0][1]?.headers).get("authorization")).toBe("Bearer secret");
+  });
+
+  it("searches anonymously without a token", async () => {
+    const fetch = fakeFetch({ items: [] });
+
+    await new GitHubRepositorySearch({ fetch }).findMostStarred({ specialty: "data", limit: 6 });
+
+    expect(new Headers(fetch.mock.calls[0][1]?.headers).has("authorization")).toBe(false);
+  });
+
   it("turns the repositories found by GitHub into repositories", async () => {
     const fetch = fakeFetch({
       items: [

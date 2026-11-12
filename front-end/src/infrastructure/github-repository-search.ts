@@ -33,14 +33,18 @@ const toRepository = (repository: GitHubRepository): Repository => ({
 
 interface Options {
   readonly fetch: typeof globalThis.fetch;
+  /** Raises the GitHub rate limit; anonymous searches work without it. */
+  readonly token?: string;
 }
 
 /** Adapter: searches repositories with the GitHub REST API. */
 export class GitHubRepositorySearch implements RepositorySearch {
   private readonly fetch: typeof globalThis.fetch;
+  private readonly headers: HeadersInit;
 
-  constructor({ fetch }: Options) {
+  constructor({ fetch, token }: Options) {
     this.fetch = fetch;
+    this.headers = token ? { Authorization: `Bearer ${token}` } : {};
   }
 
   async findMostStarred({ specialty, limit, createdSince }: RepositorySearchCriteria): Promise<Repository[]> {
@@ -53,7 +57,7 @@ export class GitHubRepositorySearch implements RepositorySearch {
     url.searchParams.set("order", "desc");
     url.searchParams.set("per_page", String(limit));
 
-    const response = await this.fetch(url);
+    const response = await this.fetch(url, { headers: this.headers });
     const { items }: GitHubSearchResponse = await response.json();
     return items.map(toRepository);
   }
