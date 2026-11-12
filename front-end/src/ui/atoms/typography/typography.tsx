@@ -41,8 +41,25 @@ const defaultComponents: Record<Variant, Component> = {
     caption4: "span",
 };
 
+const variantClasses: Record<Variant, string> = {
+    display: "text-display",
+    h1: "text-h1",
+    h2: "text-h2",
+    h3: "text-h3",
+    h4: "text-h4",
+    h5: "text-h5",
+    lead: "text-lead text-muted",
+    "body-lg": "text-body-lg",
+    "body-base": "text-body-base",
+    "body-sm": "text-body-sm",
+    caption1: "text-caption1",
+    caption2: "text-caption2",
+    caption3: "text-caption3",
+    caption4: "text-caption4 font-mono uppercase",
+};
+
 export const Typography = ({ variant, component, children }: Props) => {
     const Element = component ?? defaultComponents[variant];
 
-    return <Element>{children}</Element>;
+    return <Element className={variantClasses[variant]}>{children}</Element>;
 };
