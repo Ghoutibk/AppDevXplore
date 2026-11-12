@@ -26,4 +26,31 @@ describe("GitHubRepositorySearch", () => {
       per_page: "6",
     });
   });
+
+  it("turns the repositories found by GitHub into repositories", async () => {
+    const fetch = fakeFetch({
+      items: [
+        {
+          full_name: "pandas-dev/pandas",
+          html_url: "https://github.com/pandas-dev/pandas",
+          description: "Flexible and powerful data analysis",
+          stargazers_count: 50501,
+          language: "Python",
+          forks_count: 19000,
+        },
+      ],
+    });
+
+    const repositories = await new GitHubRepositorySearch({ fetch }).findMostStarred({ specialty: "data", limit: 6 });
+
+    expect(repositories).toEqual([
+      {
+        fullName: "pandas-dev/pandas",
+        url: "https://github.com/pandas-dev/pandas",
+        description: "Flexible and powerful data analysis",
+        stars: 50501,
+        language: "Python",
+      },
+    ]);
+  });
 });

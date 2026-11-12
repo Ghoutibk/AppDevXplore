@@ -11,6 +11,26 @@ const topics: Record<Specialty, string> = {
   "artificial-intelligence": "machine-learning",
 };
 
+interface GitHubRepository {
+  readonly full_name: string;
+  readonly html_url: string;
+  readonly description: string | null;
+  readonly stargazers_count: number;
+  readonly language: string | null;
+}
+
+interface GitHubSearchResponse {
+  readonly items: GitHubRepository[];
+}
+
+const toRepository = (repository: GitHubRepository): Repository => ({
+  fullName: repository.full_name,
+  url: repository.html_url,
+  description: repository.description,
+  stars: repository.stargazers_count,
+  language: repository.language,
+});
+
 interface Options {
   readonly fetch: typeof globalThis.fetch;
 }
@@ -30,7 +50,8 @@ export class GitHubRepositorySearch implements RepositorySearch {
     url.searchParams.set("order", "desc");
     url.searchParams.set("per_page", String(limit));
 
-    await this.fetch(url);
-    return [];
+    const response = await this.fetch(url);
+    const { items }: GitHubSearchResponse = await response.json();
+    return items.map(toRepository);
   }
 }
