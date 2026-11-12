@@ -18,9 +18,12 @@ type Variant =
 
 type Component = "h1" | "h2" | "h3" | "h4" | "h5" | "div" | "p" | "span";
 
+type Color = "muted" | "accent" | "highlight" | "inverse-muted";
+
 interface Props {
     variant: Variant;
     component?: Component;
+    color?: Color;
     children: ReactNode;
 }
 
@@ -48,7 +51,7 @@ const variantClasses: Record<Variant, string> = {
     h3: "text-h3",
     h4: "text-h4",
     h5: "text-h5",
-    lead: "text-lead text-muted",
+    lead: "text-lead",
     "body-lg": "text-body-lg",
     "body-base": "text-body-base",
     "body-sm": "text-body-sm",
@@ -58,8 +61,21 @@ const variantClasses: Record<Variant, string> = {
     caption4: "text-caption4 font-mono uppercase",
 };
 
-export const Typography = ({ variant, component, children }: Props) => {
-    const Element = component ?? defaultComponents[variant];
+const defaultColors: Partial<Record<Variant, Color>> = {
+    lead: "muted",
+};
 
-    return <Element className={variantClasses[variant]}>{children}</Element>;
+const colorClasses: Record<Color, string> = {
+    muted: "text-muted",
+    accent: "text-accent-text",
+    highlight: "text-accent",
+    "inverse-muted": "text-ink-muted",
+};
+
+export const Typography = ({ variant, component, color, children }: Props) => {
+    const Element = component ?? defaultComponents[variant];
+    const textColor = color ?? defaultColors[variant];
+    const className = textColor ? `${variantClasses[variant]} ${colorClasses[textColor]}` : variantClasses[variant];
+
+    return <Element className={className}>{children}</Element>;
 };
