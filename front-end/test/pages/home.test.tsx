@@ -15,4 +15,13 @@ describe("Home page", () => {
     expect(screen.getByRole("main")).toBeInTheDocument();
     expect(screen.getByRole("contentinfo")).toBeInTheDocument();
   });
+
+  it("introduces DevXplore to students", () => {
+    render(<Home />);
+
+    expect(
+      screen.getByRole("heading", { level: 1, name: "Trouve ton prochain projet de développement." }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/DevXplore rassemble des ressources pour les étudiants/)).toBeInTheDocument();
+  });
 });
