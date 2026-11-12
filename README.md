@@ -62,6 +62,27 @@ Le code de `front-end/src` est découpé en couches. Les dépendances vont toujo
 Les pages Next.js de `src/pages` remplissent les templates avec les données des cas d'usage.
 Un niveau ne dépend jamais d'un niveau supérieur : `test/architecture/atomic-design.test.ts` le vérifie.
 
+### Identité visuelle
+
+Les couleurs et l'échelle typographique sont des jetons Tailwind, définis dans
+`front-end/src/styles/globals.css`. On écrit `bg-cream`, `text-accent` ou `text-h2`, jamais une
+couleur en dur.
+
+| Jeton         | Valeur    | Usage                                              |
+| ------------- | --------- | -------------------------------------------------- |
+| `cream`       | `#F3EEE3` | fond des pages                                     |
+| `surface`     | `#FBF8F2` | cartes                                             |
+| `ink`         | `#111111` | texte, encarts sombres                             |
+| `muted`       | `#5A554C` | texte secondaire                                   |
+| `accent`      | `#D9541E` | boutons, pictogrammes, grands titres               |
+| `accent-text` | `#B04318` | petit texte orange, assez contrasté sur le crème   |
+| `accent-soft` | `#F7E2D6` | fond des badges et des pictogrammes                |
+| `line`        | `#DED6C6` | bordures                                           |
+
+Le texte utilise Figtree, la police par défaut du design system Astryx de Meta. Les surtitres et le
+terminal utilisent JetBrains Mono. Les deux sont chargées par `next/font` dans `src/pages/_app.tsx`.
+Tout texte passe par l'atome `Typography` et ses 14 variantes, de `display` à `caption4`.
+
 ### Langage omniprésent
 
 Les concepts du métier, tels que le code les nomme. Chaque nouveau concept s'ajoute ici, dans
