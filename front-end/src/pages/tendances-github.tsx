@@ -1,5 +1,16 @@
+import type { GetStaticProps } from "next";
+import type { SpecialtyTrends } from "@/application/get-github-trends";
+import { loadGitHubTrends } from "@/composition/github-trends";
 import { PageIntro } from "@/ui/organisms/page-intro/page-intro";
 import { MainTemplate } from "@/ui/templates/main-template/main-template";
+
+interface Props {
+  trends: SpecialtyTrends[];
+}
+
+export const getStaticProps: GetStaticProps<Props> = async () => ({
+  props: { trends: await loadGitHubTrends() },
+});
 
 export default function GitHubTrends() {
   return (
