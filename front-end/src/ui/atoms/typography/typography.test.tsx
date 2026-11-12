@@ -37,4 +37,16 @@ describe("Typography", () => {
 
     expect(screen.getByRole("heading", { level: 3, name: "Data" })).toBeInTheDocument();
   });
+
+  it("can name the section it titles", () => {
+    render(
+      <section aria-labelledby="specialites-title">
+        <Typography variant="h2" id="specialites-title">
+          Choisis ta spécialité
+        </Typography>
+      </section>,
+    );
+
+    expect(screen.getByRole("region", { name: "Choisis ta spécialité" })).toBeInTheDocument();
+  });
 });

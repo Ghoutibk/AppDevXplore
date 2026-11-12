@@ -24,6 +24,7 @@ interface Props {
     variant: Variant;
     component?: Component;
     color?: Color;
+    id?: string;
     children: ReactNode;
 }
 
@@ -72,10 +73,14 @@ const colorClasses: Record<Color, string> = {
     "inverse-muted": "text-ink-muted",
 };
 
-export const Typography = ({ variant, component, color, children }: Props) => {
+export const Typography = ({ variant, component, color, id, children }: Props) => {
     const Element = component ?? defaultComponents[variant];
     const textColor = color ?? defaultColors[variant];
     const className = textColor ? `${variantClasses[variant]} ${colorClasses[textColor]}` : variantClasses[variant];
 
-    return <Element className={className}>{children}</Element>;
+    return (
+        <Element id={id} className={className}>
+            {children}
+        </Element>
+    );
 };
