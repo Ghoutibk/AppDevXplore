@@ -55,6 +55,14 @@ describe("GitHubRepositorySearch", () => {
     expect(new Headers(fetch.mock.calls[0][1]?.headers).has("authorization")).toBe(false);
   });
 
+  it("fails when GitHub refuses the search", async () => {
+    const fetch = fakeFetch({ message: "API rate limit exceeded" }, { status: 403, statusText: "Forbidden" });
+
+    await expect(
+      new GitHubRepositorySearch({ fetch }).findMostStarred({ specialty: "data", limit: 6 }),
+    ).rejects.toThrow("GitHub search failed: 403 Forbidden");
+  });
+
   it("turns the repositories found by GitHub into repositories", async () => {
     const fetch = fakeFetch({
       items: [

@@ -58,6 +58,8 @@ export class GitHubRepositorySearch implements RepositorySearch {
     url.searchParams.set("per_page", String(limit));
 
     const response = await this.fetch(url, { headers: this.headers });
+    if (!response.ok) throw new Error(`GitHub search failed: ${response.status} ${response.statusText}`);
+
     const { items }: GitHubSearchResponse = await response.json();
     return items.map(toRepository);
   }
