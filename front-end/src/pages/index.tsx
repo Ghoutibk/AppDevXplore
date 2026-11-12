@@ -11,7 +11,10 @@ import { MainTemplate } from "@/ui/templates/main-template/main-template";
 export default function Home() {
   return (
     <>
-      <Seo title="DevXplore" description="Description..." />
+      <Seo
+        title="DevXplore"
+        description="Idées de projets en data, cybersécurité et IA, tendances, outils et dépôts GitHub : les ressources de DevXplore, l'association de développement de l'école."
+      />
       <MainTemplate>
         <Hero
           kicker="// l'asso dev de l'école"

@@ -16,6 +16,15 @@ describe("Home page", () => {
     expect(screen.getByRole("contentinfo")).toBeInTheDocument();
   });
 
+  it("describes itself to search engines", () => {
+    render(<Home />);
+
+    expect(document.head.querySelector('meta[name="description"]')).toHaveAttribute(
+      "content",
+      "Idées de projets en data, cybersécurité et IA, tendances, outils et dépôts GitHub : les ressources de DevXplore, l'association de développement de l'école.",
+    );
+  });
+
   it("introduces DevXplore to students", () => {
     render(<Home />);
 
