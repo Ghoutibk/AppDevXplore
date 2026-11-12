@@ -1,0 +1,29 @@
+// @vitest-environment node
+import { describe, expect, it, vi } from "vitest";
+import { GitHubRepositorySearch } from "./github-repository-search";
+
+const fakeFetch = (body: unknown, init: ResponseInit = { status: 200 }) =>
+  vi.fn<typeof fetch>(async () => new Response(JSON.stringify(body), init));
+
+const requestedUrl = (fetch: ReturnType<typeof fakeFetch>) => new URL(String(fetch.mock.calls[0][0]));
+
+describe("GitHubRepositorySearch", () => {
+  it.each([
+    ["data", "data-science"],
+    ["cybersecurity", "cybersecurity"],
+    ["artificial-intelligence", "machine-learning"],
+  ] as const)("searches %s repositories through the %s topic, most starred first", async (specialty, topic) => {
+    const fetch = fakeFetch({ items: [] });
+
+    await new GitHubRepositorySearch({ fetch }).findMostStarred({ specialty, limit: 6 });
+
+    const url = requestedUrl(fetch);
+    expect(`${url.origin}${url.pathname}`).toBe("https://api.github.com/search/repositories");
+    expect(Object.fromEntries(url.searchParams)).toEqual({
+      q: `topic:${topic}`,
+      sort: "stars",
+      order: "desc",
+      per_page: "6",
+    });
+  });
+});
