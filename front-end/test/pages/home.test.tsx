@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
 import Home from "@/pages/index";
@@ -31,5 +31,15 @@ describe("Home page", () => {
     for (const folder of ["projets/", "tendances/", "outils/", "github/", "data/", "cybersecurite/", "ia/"]) {
       expect(screen.getByText(folder)).toBeInTheDocument();
     }
+  });
+
+  it("offers project ideas for each specialty, coming soon", () => {
+    render(<Home />);
+
+    const specialties = within(screen.getByRole("region", { name: "Choisis ta spécialité" }));
+    for (const specialty of ["Data", "Cybersécurité", "Intelligence artificielle"]) {
+      expect(specialties.getByRole("heading", { level: 3, name: specialty })).toBeInTheDocument();
+    }
+    expect(specialties.getAllByText("Bientôt")).toHaveLength(3);
   });
 });
