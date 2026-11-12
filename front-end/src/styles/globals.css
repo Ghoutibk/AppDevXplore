@@ -3,3 +3,17 @@
 @theme {
     --font-sans: var(--font-inter), system-ui, sans-serif;
 }
+
+/* Palette: cream, ink black and burnt orange. */
+@theme {
+    --color-cream: #f3eee3;
+    --color-surface: #fbf8f2;
+    --color-line: #ded6c6;
+    --color-ink: #111111;
+    --color-muted: #5a554c;
+    --color-ink-muted: #c9c2b4;
+    --color-ink-subtle: #a39e94;
+    --color-accent: #d9541e;
+    --color-accent-text: #b04318;
+    --color-accent-soft: #f7e2d6;
+}
