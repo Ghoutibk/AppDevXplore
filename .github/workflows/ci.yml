@@ -26,3 +26,6 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+        env:
+          # The build searches GitHub; the token lifts the anonymous rate limit shared by runners.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
