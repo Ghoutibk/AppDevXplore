@@ -116,4 +116,14 @@ describe("Projects page", () => {
       "Exploration",
     ]);
   });
+
+  it("invites students to share a project idea, with the guide that explains how", () => {
+    render(<Projects specialty="data" ideas={[]} />);
+
+    const invitation = within(screen.getByRole("region", { name: "Une idée de projet à partager ?" }));
+    expect(invitation.getByRole("link", { name: "Proposer une idée" })).toHaveAttribute(
+      "href",
+      "https://github.com/Ghoutibk/AppDevXplore/blob/main/CONTRIBUTING.md#proposer-une-idée-de-projet",
+    );
+  });
 });

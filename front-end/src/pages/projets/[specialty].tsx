@@ -2,9 +2,12 @@ import type { GetStaticPaths, GetStaticProps } from "next";
 import type { LevelProjects } from "@/application/get-project-ideas";
 import { loadProjectIdeas } from "@/composition/project-ideas";
 import type { Level } from "@/domain/level";
+import { SOURCE_CODE_URL } from "@/domain/site";
 import { specialties, type Specialty } from "@/domain/specialty";
+import { ButtonLink } from "@/ui/atoms/button-link/button-link";
 import { Seo } from "@/ui/atoms/seo/seo";
 import { ProjectCard } from "@/ui/molecules/project-card/project-card";
+import { CallToAction } from "@/ui/organisms/call-to-action/call-to-action";
 import { FeatureSection } from "@/ui/organisms/feature-section/feature-section";
 import { PageIntro } from "@/ui/organisms/page-intro/page-intro";
 import { MainTemplate } from "@/ui/templates/main-template/main-template";
@@ -15,6 +18,8 @@ interface Props {
 }
 
 type Params = { specialty: string };
+
+const IDEA_GUIDE_URL = `${SOURCE_CODE_URL}/blob/main/CONTRIBUTING.md#proposer-une-idée-de-projet`;
 
 const pages: Record<Specialty, { slug: string; title: string; lead: string; description: string }> = {
   data: {
@@ -88,6 +93,16 @@ export default function Projects({ specialty, ideas }: Props) {
             ))}
           </FeatureSection>
         ))}
+        <CallToAction
+          kicker="// contribuer"
+          title="Une idée de projet à partager ?"
+          description="Ce catalogue est fait par les étudiants. Propose la tienne par une pull request : elle sera relue avant d'être publiée."
+          action={
+            <ButtonLink href={IDEA_GUIDE_URL} variant="primary">
+              Proposer une idée
+            </ButtonLink>
+          }
+        />
       </MainTemplate>
     </>
   );
