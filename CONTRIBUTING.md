@@ -52,6 +52,30 @@ type(scope): description
 
 Exemples : `feat(domain): add specialty`, `fix(seo): load favicon from site root`.
 
+## Proposer une idée de projet
+
+Les idées de projets vivent dans `front-end/src/infrastructure/project-ideas/`, un fichier par
+spécialité : `data.ts`, `cybersecurity.ts` et `artificial-intelligence.ts`. Pour en proposer une,
+ajoute un objet à la liste du bon fichier :
+
+```ts
+{
+  title: "Créer un tableau de bord interactif",
+  specialty: "data",
+  level: "beginner", // ou "intermediate", "advanced"
+  summary: "Ce que l'étudiant construit, en une ou deux phrases, à l'impératif et au tutoiement.",
+  skills: ["Streamlit", "Graphiques interactifs", "Mise en ligne"],
+  startingPoint: { label: "Documentation de Streamlit", url: "https://docs.streamlit.io/" },
+},
+```
+
+- `skills` : trois compétences ou outils que le projet fait pratiquer.
+- `startingPoint` : une seule ressource pour démarrer, gratuite et en accès libre. Vérifie que le lien répond.
+- En cybersécurité, ne propose que des projets qui se pratiquent dans un cadre légal : ses propres
+  machines ou une plateforme d'entraînement.
+
+La page de la spécialité affiche l'idée dans la section de son niveau, dans l'ordre du fichier.
+
 ## Règles d'ingénierie
 
 - **Clean Architecture** : les dépendances vont toujours vers le domaine (voir le README).
