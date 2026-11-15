@@ -3,6 +3,7 @@ import type { LevelProjects } from "@/application/get-project-ideas";
 import { loadProjectIdeas } from "@/composition/project-ideas";
 import type { Level } from "@/domain/level";
 import { specialties, type Specialty } from "@/domain/specialty";
+import { Seo } from "@/ui/atoms/seo/seo";
 import { ProjectCard } from "@/ui/molecules/project-card/project-card";
 import { FeatureSection } from "@/ui/organisms/feature-section/feature-section";
 import { PageIntro } from "@/ui/organisms/page-intro/page-intro";
@@ -15,21 +16,27 @@ interface Props {
 
 type Params = { specialty: string };
 
-const pages: Record<Specialty, { slug: string; title: string; lead: string }> = {
+const pages: Record<Specialty, { slug: string; title: string; lead: string; description: string }> = {
   data: {
     slug: "data",
     title: "Projets data",
     lead: "Des idées de projets pour apprendre à collecter, nettoyer et faire parler les données. Choisis ton niveau et lance-toi.",
+    description:
+      "Des idées de projets data pour les étudiants, classées par niveau : du premier jeu de données au pipeline automatisé.",
   },
   cybersecurity: {
     slug: "cybersecurite",
     title: "Projets cybersécurité",
     lead: "Des idées de projets pour comprendre les attaques et apprendre à s'en défendre, toujours dans un cadre légal : tes propres machines ou des plateformes d'entraînement.",
+    description:
+      "Des idées de projets de cybersécurité pour les étudiants, classées par niveau : défis, durcissement de serveur, détection d'intrusion.",
   },
   "artificial-intelligence": {
     slug: "ia",
     title: "Projets IA",
     lead: "Des idées de projets pour entraîner, évaluer et déployer des modèles, du premier classifieur à l'agent qui utilise des outils.",
+    description:
+      "Des idées de projets d'intelligence artificielle pour les étudiants, classées par niveau : du premier classifieur à l'agent.",
   },
 };
 
@@ -67,18 +74,21 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
 };
 
 export default function Projects({ specialty, ideas }: Props) {
-  const { title, lead } = pages[specialty];
+  const { title, lead, description } = pages[specialty];
 
   return (
-    <MainTemplate>
-      <PageIntro kicker="// projets" title={title} lead={lead} />
-      {ideas.map(({ level, projects }) => (
-        <FeatureSection key={level} {...sections[level]}>
-          {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
-          ))}
-        </FeatureSection>
-      ))}
-    </MainTemplate>
+    <>
+      <Seo title={`${title} · DevXplore`} description={description} />
+      <MainTemplate>
+        <PageIntro kicker="// projets" title={title} lead={lead} />
+        {ideas.map(({ level, projects }) => (
+          <FeatureSection key={level} {...sections[level]}>
+            {projects.map((project) => (
+              <ProjectCard key={project.title} project={project} />
+            ))}
+          </FeatureSection>
+        ))}
+      </MainTemplate>
+    </>
   );
 }

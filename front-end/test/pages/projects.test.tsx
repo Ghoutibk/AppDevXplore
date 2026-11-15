@@ -1,5 +1,6 @@
 import { render, screen, within } from "@testing-library/react";
 import type { GetStaticPathsContext } from "next";
+import type { ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
 import type { LevelProjects } from "@/application/get-project-ideas";
 import type { Level } from "@/domain/level";
@@ -23,6 +24,10 @@ const { ideasOf } = vi.hoisted(() => ({
       ],
     },
   ],
+}));
+
+vi.mock("next/head", () => ({
+  default: ({ children }: { children: ReactNode }) => <>{children}</>,
 }));
 
 vi.mock("@/composition/project-ideas", () => ({
@@ -71,6 +76,29 @@ describe("Projects page", () => {
     expect(screen.getByRole("heading", { level: 1, name: title })).toBeInTheDocument();
     expect(screen.getByText(lead)).toBeInTheDocument();
     expect(screen.getByRole("contentinfo")).toBeInTheDocument();
+  });
+
+  it.each([
+    [
+      "data",
+      "Projets data · DevXplore",
+      "Des idées de projets data pour les étudiants, classées par niveau : du premier jeu de données au pipeline automatisé.",
+    ],
+    [
+      "cybersecurity",
+      "Projets cybersécurité · DevXplore",
+      "Des idées de projets de cybersécurité pour les étudiants, classées par niveau : défis, durcissement de serveur, détection d'intrusion.",
+    ],
+    [
+      "artificial-intelligence",
+      "Projets IA · DevXplore",
+      "Des idées de projets d'intelligence artificielle pour les étudiants, classées par niveau : du premier classifieur à l'agent.",
+    ],
+  ] as const)("describes the %s projects to browsers and search engines", (specialty, title, description) => {
+    render(<Projects specialty={specialty} ideas={[]} />);
+
+    expect(document.title).toBe(title);
+    expect(document.head.querySelector('meta[name="description"]')).toHaveAttribute("content", description);
   });
 
   it.each([
