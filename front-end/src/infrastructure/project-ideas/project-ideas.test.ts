@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { levels } from "@/domain/level";
 import type { Project } from "@/domain/project";
 import type { Specialty } from "@/domain/specialty";
+import { artificialIntelligenceProjects } from "./artificial-intelligence";
 import { cybersecurityProjects } from "./cybersecurity";
 import { dataProjects } from "./data";
 
@@ -15,5 +16,9 @@ describe("project ideas", () => {
 
   it("offers cybersecurity projects at every level", () => {
     expect(levelsCovered(cybersecurityProjects, "cybersecurity")).toEqual(levels);
+  });
+
+  it("offers artificial intelligence projects at every level", () => {
+    expect(levelsCovered(artificialIntelligenceProjects, "artificial-intelligence")).toEqual(levels);
   });
 });
