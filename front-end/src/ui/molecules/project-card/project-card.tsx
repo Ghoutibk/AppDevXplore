@@ -16,6 +16,15 @@ export const ProjectCard = ({ project }: Props) => {
                     {project.summary}
                 </Typography>
             </div>
+            <ul aria-label="Compétences travaillées" className="flex flex-wrap gap-2">
+                {project.skills.map((skill) => (
+                    <li key={skill} className="rounded-full border border-line px-2.5 py-1">
+                        <Typography variant="caption3" color="muted">
+                            {skill}
+                        </Typography>
+                    </li>
+                ))}
+            </ul>
         </article>
     );
 };

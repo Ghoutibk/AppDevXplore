@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import type { Project } from "@/domain/project";
 import { ProjectCard } from "./project-card";
@@ -18,5 +18,12 @@ describe("ProjectCard", () => {
 
     expect(screen.getByRole("heading", { level: 3, name: "Faire parler un jeu de données ouvert" })).toBeInTheDocument();
     expect(screen.getByText("Choisis un jeu de données, nettoie-le, puis raconte ce que tu y trouves.")).toBeInTheDocument();
+  });
+
+  it("lists the skills the project makes students practise", () => {
+    render(<ProjectCard project={openData} />);
+
+    const skills = within(screen.getByRole("list", { name: "Compétences travaillées" })).getAllByRole("listitem");
+    expect(skills.map(({ textContent }) => textContent)).toEqual(["pandas", "Nettoyage de données", "Visualisation"]);
   });
 });
