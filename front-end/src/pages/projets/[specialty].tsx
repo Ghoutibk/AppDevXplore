@@ -1,10 +1,13 @@
 import type { GetStaticPaths, GetStaticProps } from "next";
+import type { LevelProjects } from "@/application/get-project-ideas";
+import { loadProjectIdeas } from "@/composition/project-ideas";
 import { specialties, type Specialty } from "@/domain/specialty";
 import { PageIntro } from "@/ui/organisms/page-intro/page-intro";
 import { MainTemplate } from "@/ui/templates/main-template/main-template";
 
 interface Props {
   specialty: Specialty;
+  ideas: LevelProjects[];
 }
 
 type Params = { specialty: string };
@@ -36,7 +39,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) 
   // With fallback: false, Next only asks for the addresses listed by getStaticPaths.
   const specialty = specialties.find((candidate) => pages[candidate].slug === params?.specialty)!;
 
-  return { props: { specialty } };
+  return { props: { specialty, ideas: await loadProjectIdeas(specialty) } };
 };
 
 export default function Projects({ specialty }: Props) {
