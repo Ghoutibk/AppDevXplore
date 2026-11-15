@@ -26,4 +26,13 @@ describe("ProjectCard", () => {
     const skills = within(screen.getByRole("list", { name: "Compétences travaillées" })).getAllByRole("listitem");
     expect(skills.map(({ textContent }) => textContent)).toEqual(["pandas", "Nettoyage de données", "Visualisation"]);
   });
+
+  it("links to the resource that gets the project started", () => {
+    render(<ProjectCard project={openData} />);
+
+    expect(screen.getByRole("link", { name: "Pour démarrer : data.gouv.fr" })).toHaveAttribute(
+      "href",
+      "https://www.data.gouv.fr/",
+    );
+  });
 });

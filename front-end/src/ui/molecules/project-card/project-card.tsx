@@ -1,4 +1,5 @@
 import type { Project } from "@/domain/project";
+import { Icon } from "@/ui/atoms/icon/icon";
 import { Typography } from "@/ui/atoms/typography/typography";
 
 interface Props {
@@ -25,6 +26,13 @@ export const ProjectCard = ({ project }: Props) => {
                     </li>
                 ))}
             </ul>
+            <a
+                href={project.startingPoint.url}
+                className="inline-flex min-h-11 items-center gap-1.5 self-start text-caption1 text-accent-text"
+            >
+                Pour démarrer : {project.startingPoint.label}
+                <Icon name="arrow-right" size={16} />
+            </a>
         </article>
     );
 };
