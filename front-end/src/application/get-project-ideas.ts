@@ -12,5 +12,7 @@ export interface LevelProjects {
 export async function getProjectIdeas(catalog: ProjectCatalog, specialty: Specialty): Promise<LevelProjects[]> {
   const projects = await catalog.findBySpecialty(specialty);
 
-  return levels.map((level) => ({ level, projects: projects.filter((project) => project.level === level) }));
+  return levels
+    .map((level) => ({ level, projects: projects.filter((project) => project.level === level) }))
+    .filter((levelProjects) => levelProjects.projects.length > 0);
 }

@@ -44,4 +44,15 @@ describe("getProjectIdeas", () => {
       ["advanced", ["Forecast"]],
     ]);
   });
+
+  it("leaves out the levels that have no project idea yet", async () => {
+    const catalog = new FakeProjectCatalog([
+      project("Exploration", "data", "beginner"),
+      project("Forecast", "data", "advanced"),
+    ]);
+
+    const ideas = await getProjectIdeas(catalog, "data");
+
+    expect(ideas.map(({ level }) => level)).toEqual(["beginner", "advanced"]);
+  });
 });
