@@ -26,12 +26,11 @@ export const ProjectCard = ({ project }: Props) => {
                     </li>
                 ))}
             </ul>
-            <a
-                href={project.startingPoint.url}
-                className="inline-flex min-h-11 items-center gap-1.5 self-start text-caption1 text-accent-text"
-            >
-                Pour démarrer : {project.startingPoint.label}
-                <Icon name="arrow-right" size={16} />
+            <a href={project.startingPoint.url} className="self-start py-3 text-caption1 text-balance text-accent-text">
+                Pour démarrer : {project.startingPoint.label}{" "}
+                <span className="inline-block align-[-0.15em]">
+                    <Icon name="arrow-right" size={16} />
+                </span>
             </a>
         </article>
     );
