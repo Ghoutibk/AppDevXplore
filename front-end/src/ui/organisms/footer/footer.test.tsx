@@ -15,6 +15,13 @@ describe("Footer", () => {
     expect(within(footer).getByText("L'association de développement de l'école.")).toBeInTheDocument();
   });
 
+  it("repeats the navigation of the site", () => {
+    render(<Footer />);
+
+    const navigation = within(screen.getByRole("contentinfo")).getByRole("navigation", { name: "Pied de page" });
+    expect(within(navigation).getByRole("link", { name: "Projets" })).toBeInTheDocument();
+  });
+
   it("links to the source code of the site", () => {
     render(<Footer />);
 
