@@ -1,7 +1,9 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import type { GetStaticPathsContext } from "next";
 import { describe, expect, it, vi } from "vitest";
 import type { LevelProjects } from "@/application/get-project-ideas";
+import type { Level } from "@/domain/level";
+import type { Project } from "@/domain/project";
 import type { Specialty } from "@/domain/specialty";
 import Projects, { getStaticPaths, getStaticProps } from "@/pages/projets/[specialty]";
 
@@ -26,6 +28,15 @@ const { ideasOf } = vi.hoisted(() => ({
 vi.mock("@/composition/project-ideas", () => ({
   loadProjectIdeas: async (specialty: Specialty) => ideasOf(specialty),
 }));
+
+const project = (title: string, level: Level): Project => ({
+  title,
+  specialty: "data",
+  level,
+  summary: "",
+  skills: [],
+  startingPoint: { label: "", url: "" },
+});
 
 describe("Projects page", () => {
   it("exists for each specialty, under its French address", async () => {
@@ -60,5 +71,21 @@ describe("Projects page", () => {
     expect(screen.getByRole("heading", { level: 1, name: title })).toBeInTheDocument();
     expect(screen.getByText(lead)).toBeInTheDocument();
     expect(screen.getByRole("contentinfo")).toBeInTheDocument();
+  });
+
+  it.each([
+    ["beginner", "Débutant"],
+    ["intermediate", "Intermédiaire"],
+    ["advanced", "Avancé"],
+  ] as const)("gathers the %s project ideas in a section titled %s", (level, title) => {
+    const ideas = [{ level, projects: [project("Dashboard", level), project("Exploration", level)] }];
+
+    render(<Projects specialty="data" ideas={ideas} />);
+
+    const section = within(screen.getByRole("region", { name: title }));
+    expect(section.getAllByRole("heading", { level: 3 }).map(({ textContent }) => textContent)).toEqual([
+      "Dashboard",
+      "Exploration",
+    ]);
   });
 });
