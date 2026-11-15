@@ -8,4 +8,11 @@ describe("Header", () => {
 
     expect(within(screen.getByRole("banner")).getByRole("link", { name: "DevXplore" })).toBeInTheDocument();
   });
+
+  it("offers the main navigation of the site", () => {
+    render(<Header />);
+
+    const navigation = within(screen.getByRole("banner")).getByRole("navigation", { name: "Navigation principale" });
+    expect(within(navigation).getByRole("link", { name: "Projets" })).toBeInTheDocument();
+  });
 });
