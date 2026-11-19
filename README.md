@@ -98,6 +98,10 @@ Les concepts du métier, tels que le code les nomme. Chaque nouveau concept s'aj
 | Dépôt           | `Repository`  | projet open source hébergé sur GitHub                                       |
 | Dépôt qui monte | `rising`      | dépôt créé ces 30 derniers jours, classé par nombre d'étoiles               |
 | Incontournable  | `mostStarred` | dépôt le plus étoilé de sa spécialité, tous temps confondus                 |
+| Projet          | `Project`     | idée de projet qu'un étudiant peut réaliser pour pratiquer sa spécialité    |
+| Niveau          | `Level`       | expérience que demande un projet : débutant, intermédiaire ou avancé        |
+| Compétence      | `skills`      | outil ou savoir-faire qu'un projet fait pratiquer                           |
+| Point de départ | `startingPoint` | ressource en ligne pour démarrer un projet                                |
 
 ## Contribuer
 

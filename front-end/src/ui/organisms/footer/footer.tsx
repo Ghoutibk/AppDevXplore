@@ -1,6 +1,7 @@
 import { SOURCE_CODE_URL } from "@/domain/site";
 import { Logo } from "@/ui/atoms/logo/logo";
 import { Typography } from "@/ui/atoms/typography/typography";
+import { Navigation } from "@/ui/molecules/navigation/navigation";
 
 export const Footer = () => {
     return (
@@ -12,6 +13,7 @@ export const Footer = () => {
                         L&apos;association de développement de l&apos;école.
                     </Typography>
                 </div>
+                <Navigation label="Pied de page" />
                 <a href={SOURCE_CODE_URL} className="inline-flex min-h-11 items-center text-caption2 underline">
                     Code source du site
                 </a>

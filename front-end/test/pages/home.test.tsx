@@ -49,14 +49,25 @@ describe("Home page", () => {
     }
   });
 
-  it("offers project ideas for each specialty, coming soon", () => {
+  it("offers project ideas for each specialty", () => {
     render(<Home />);
 
     const specialties = within(screen.getByRole("region", { name: "Choisis ta spécialité" }));
     for (const specialty of ["Data", "Cybersécurité", "Intelligence artificielle"]) {
       expect(specialties.getByRole("heading", { level: 3, name: specialty })).toBeInTheDocument();
     }
-    expect(specialties.getAllByText("Bientôt")).toHaveLength(3);
+  });
+
+  it.each([
+    ["Voir les projets data", "/projets/data"],
+    ["Voir les projets cyber", "/projets/cybersecurite"],
+    ["Voir les projets IA", "/projets/ia"],
+  ])("leads to the project ideas of a specialty through « %s »", (label, href) => {
+    render(<Home />);
+
+    const specialties = within(screen.getByRole("region", { name: "Choisis ta spécialité" }));
+    expect(specialties.getByRole("link", { name: label })).toHaveAttribute("href", href);
+    expect(specialties.queryByText("Bientôt")).not.toBeInTheDocument();
   });
 
   it("points to the other resources, some coming soon", () => {

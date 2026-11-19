@@ -52,18 +52,21 @@ export default function Home() {
             icon="chart"
             title="Data"
             description="Collecter, nettoyer et visualiser des données, du tableau de bord au pipeline."
+            link={{ href: "/projets/data", label: "Voir les projets data" }}
           />
           <FeatureCard
             appearance="boxed"
             icon="shield"
             title="Cybersécurité"
             description="Comprendre les attaques pour mieux défendre : CTF, durcissement, analyse."
+            link={{ href: "/projets/cybersecurite", label: "Voir les projets cyber" }}
           />
           <FeatureCard
             appearance="boxed"
             icon="chip"
             title="Intelligence artificielle"
             description="Entraîner, évaluer et déployer des modèles, du classifieur à l'agent."
+            link={{ href: "/projets/ia", label: "Voir les projets IA" }}
           />
         </FeatureSection>
         <FeatureSection
